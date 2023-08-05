@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
+import { useState } from 'react';
 import styled from "styled-components";
 import Home from './components/Home';
 import Login from './components/Login';
@@ -11,10 +12,13 @@ const Container = styled.div`
 `;
 
 function App() {
+  const [basket, setBasket] = useState([]);
+  console.log("basket >>>", basket);
+
   return (
     <Container>
       <Routes>
-        <Route path='/' element={<Home/>} />
+        <Route path='/' element={<Home basket={basket} setBasket={setBasket}/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<SignUp/>} />
       </Routes>

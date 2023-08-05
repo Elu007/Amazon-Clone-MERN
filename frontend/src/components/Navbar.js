@@ -141,7 +141,7 @@ const BasketButton = styled.div`
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({basket}) => {
     return (
         <Container>
             <Inner>
@@ -165,7 +165,7 @@ const Navbar = () => {
                     </NavButton>
                     <BasketButton>
                         <img src="./basket-icon.png" alt="basketImage" />
-                        <p>0</p>
+                        <p>{basket.length}</p>
                     </BasketButton>
                 </RightContainer>
             </Inner>
