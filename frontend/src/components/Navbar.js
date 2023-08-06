@@ -1,5 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
+import { useStateValue } from '../StateProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -141,42 +142,45 @@ const BasketButton = styled.div`
   }
 `;
 
-const Navbar = ({basket}) => {
-    return (
-        <Container>
-            <Inner>
-                <Logo>
-                    <img src="./amazon_logo1.png" alt="logoImage" />
-                </Logo>
-                <SearchBar>
-                    <input type="text" placeholder='Search...' />
-                    <SearchIcon>
-                        <img src="./searchIcon.png" alt="searchIconImage" />
-                    </SearchIcon>
-                </SearchBar>
-                <RightContainer>
-                    <NavButton>
-                        <p>Hello,</p>
-                        <p>Guest</p>
-                    </NavButton>
-                    <NavButton>
-                        <p>Return</p>
-                        <p>& Orders</p>
-                    </NavButton>
-                    <BasketButton>
-                        <img src="./basket-icon.png" alt="basketImage" />
-                        <p>{basket.length}</p>
-                    </BasketButton>
-                </RightContainer>
-            </Inner>
-            <MobileSearchBar>
-                    <input type="text" placeholder='Search...' />
-                    <SearchIcon>
-                        <img src="./searchIcon.png" alt="searchIconImage" />
-                    </SearchIcon>
-                </MobileSearchBar>
-        </Container>
-    )
+const Navbar = () => {
+
+  const [{basket}] = useStateValue();
+  const navigate = useNavigate();
+  return (
+    <Container>
+      <Inner>
+        <Logo>
+          <img src="./amazon_logo1.png" alt="logoImage" />
+        </Logo>
+        <SearchBar>
+          <input type="text" placeholder='Search...' />
+          <SearchIcon>
+            <img src="./searchIcon.png" alt="searchIconImage" />
+          </SearchIcon>
+        </SearchBar>
+        <RightContainer>
+          <NavButton>
+            <p>Hello,</p>
+            <p>Guest</p>
+          </NavButton>
+          <NavButton>
+            <p>Return</p>
+            <p>& Orders</p>
+          </NavButton>
+          <BasketButton onClick={()=> navigate('/checkout')}>
+            <img src="./basket-icon.png" alt="basketImage" />
+            <p>{basket.length}</p>
+          </BasketButton>
+        </RightContainer>
+      </Inner>
+      <MobileSearchBar>
+        <input type="text" placeholder='Search...' />
+        <SearchIcon>
+          <img src="./searchIcon.png" alt="searchIconImage" />
+        </SearchIcon>
+      </MobileSearchBar>
+    </Container>
+  )
 }
 
 export default Navbar

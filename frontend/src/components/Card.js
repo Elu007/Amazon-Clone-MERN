@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Rating } from '@mui/material'
+import { useStateValue } from '../StateProvider';
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -54,9 +55,22 @@ const Description = styled.div`
   }
 `;
 
-const Card = ({basket, setBasket, image, title, price, rating}) => {
-  const addToBasket = () =>{
-    setBasket([...basket, {image,title,price,rating}]);
+const Card = ({ image, title, price, rating}) => {
+  const [{basket}, dispatch] = useStateValue();
+  console.log('basket>>>', basket);
+
+  const addToBasket = (e) =>{
+    e.preventDefault();
+
+    dispatch({
+      type:'ADD_TO_BASKET',
+      item:{
+        title,
+        price,
+        image,
+        rating,
+      }
+    })
   }
 
   return (

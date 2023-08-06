@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import { useState } from 'react';
 import styled from "styled-components";
 import Home from './components/Home';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import Checkout from './components/Checkout';
 
 
 const Container = styled.div`
@@ -12,14 +12,13 @@ const Container = styled.div`
 `;
 
 function App() {
-  const [basket, setBasket] = useState([]);
-  console.log("basket >>>", basket);
 
   return (
     <Container>
       <Routes>
-        <Route path='/' element={<Home basket={basket} setBasket={setBasket}/>} />
+        <Route path='/' element={<Home/>} />
         <Route path='/login' element={<Login/>} />
+        <Route path='/checkout' element={<Checkout/>} />
         <Route path='/signup' element={<SignUp/>} />
       </Routes>
     </Container>

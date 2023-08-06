@@ -70,19 +70,19 @@ const Main = styled.div`
   }
 `;
 
-const Home = ({basket,setBasket}) => {
+const Home = () => {
   
 
   return (
     <Container>
-      <Navbar basket={basket}/>
+      <Navbar/>
       <Banner>
         <img src="./banner.jpg" alt="banner" />
         <img src="./mobile_banner.jpg" alt="mobile banner" />
       </Banner>
 
       <Main>
-        <Card basket={basket} setBasket={setBasket} image={"./logo192.png"} price={2500} rating={4} title={"EcoDot"}/>
+        <Card image={"./logo192.png"} price={2500} rating={4} title={"EcoDot"}/>
       </Main>
     </Container>
   )
