@@ -55,7 +55,7 @@ const Description = styled.div`
   }
 `;
 
-const Card = ({ image, title, price, rating}) => {
+const Card = ({ id, image, title, price, rating}) => {
   const [{basket}, dispatch] = useStateValue();
   console.log('basket>>>', basket);
 
@@ -65,6 +65,7 @@ const Card = ({ image, title, price, rating}) => {
     dispatch({
       type:'ADD_TO_BASKET',
       item:{
+        id,
         title,
         price,
         image,

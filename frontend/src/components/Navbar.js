@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useStateValue } from '../StateProvider';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -150,7 +150,7 @@ const Navbar = () => {
     <Container>
       <Inner>
         <Logo>
-          <img src="./amazon_logo1.png" alt="logoImage" />
+          <Link to='/'><img src="./amazon_logo1.png" alt="logoImage" /></Link>
         </Logo>
         <SearchBar>
           <input type="text" placeholder='Search...' />

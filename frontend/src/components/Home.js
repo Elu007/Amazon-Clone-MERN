@@ -82,7 +82,7 @@ const Home = () => {
       </Banner>
 
       <Main>
-        <Card image={"./logo192.png"} price={2500} rating={4} title={"EcoDot"}/>
+        <Card id={1} image={"./logo192.png"} price={2500} rating={4} title={"EcoDot"}/>
       </Main>
     </Container>
   )

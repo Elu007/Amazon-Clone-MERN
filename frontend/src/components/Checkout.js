@@ -47,6 +47,9 @@ const Subtotal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  p{
+    font-weight: bold;
+  }
 
   @media only screen and (max-width: 1200px) {
     flex: none;
@@ -116,9 +119,17 @@ const Description = styled.div`
 `;
 
 const Checkout = () => {
-  const [{ basket }] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
   console.log('checkout >>>', basket);
   const navigate = useNavigate();
+
+  const removeFromBasket = (e,id) =>{
+    e.preventDefault();
+    dispatch({
+      type: 'REMOVE_FROM_BASKET',
+      id: id
+    })
+  }
 
   return (
     <Container>
@@ -126,20 +137,31 @@ const Checkout = () => {
       <Main>
         <ShoppingCart>
           <h2>Shopping Cart</h2>
-          <Product>
-            <Image>
-              <img src="" alt="" />
-            </Image>
-            <Description>
-              <h4>Eco</h4>
-              <p></p>
-              <button></button>
-            </Description>
-          </Product>
-        </ShoppingCart>
-       <Subtotal>
-          <NumericFormat value={getBasketTotal(basket).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'₹'} />
 
+          {
+            basket?.map((product) => (
+              <Product>
+                <Image>
+                  <img src={product.image} alt="productImage" />
+                </Image>
+                <Description>
+                  <h4>{product.title}</h4>
+                  <p>₹{product.price}</p>
+                  <button onClick={(e) => removeFromBasket(e,product.id)}>Remove</button>
+                </Description>
+              </Product>
+            ))
+          }
+
+        </ShoppingCart>
+        <Subtotal>
+          <p>Subtotal ( {basket.length} items): &nbsp;
+            <NumericFormat value={getBasketTotal(basket).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'₹'} />
+          </p>
+          <small>
+            <input type="checkbox" />
+            <span>This order contains a gift.</span>
+          </small>
           <button onClick={() => navigate("/address")}>
             Proceed to Checkout
           </button>
