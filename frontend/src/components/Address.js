@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Navbar from './Navbar';
 import { useStateValue } from '../StateProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -53,6 +54,11 @@ const InputContainer = styled.div`
     font-weight: 600;
   }
 
+  p::after{
+    content: "*";
+    color: red;
+  }
+
   input {
     width: 95%;
     height: 33px;
@@ -77,6 +83,7 @@ const Address = () => {
   const [landmark, setLandmark] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const navigate = useNavigate();
 
   const deliver = (e) =>{
     e.preventDefault();
@@ -90,6 +97,7 @@ const Address = () => {
         state
       },
     });
+    navigate('/payment')
   }
 
   return (

@@ -76,7 +76,7 @@ const Subtotal = styled.div`
     background-color: #ffd814;
     border: none;
     outline: none;
-
+    cursor: pointer;
     border-radius: 8px;
   }
 `;
@@ -94,6 +94,7 @@ const Image = styled.div`
 `;
 const Description = styled.div`
   flex: 0.7;
+  margin-left: 10vw;
 
   h4 {
     font-weight: 600;
