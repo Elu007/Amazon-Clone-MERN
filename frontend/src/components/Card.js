@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Rating } from '@mui/material'
 import { useStateValue } from '../StateProvider';
+
 const Container = styled.div`
   width: 100%;
   height: 100%;

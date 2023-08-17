@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Navbar from './Navbar';
 import { useStateValue } from '../StateProvider';
 import { getBasketTotal } from '../reducer';
 import { NumericFormat } from 'react-number-format';
@@ -14,7 +13,6 @@ const Payment = () => {
 
   return (
     <Container>
-      <Navbar />
       <Main>
         <ReviewContainer>
           <h2>Review Your Order</h2>

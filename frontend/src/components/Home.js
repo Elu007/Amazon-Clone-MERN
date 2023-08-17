@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import Navbar from './Navbar';
 import Card from './Card';
+import axios from 'axios'
 
 const Container = styled.div`
    width: 100%;
@@ -71,18 +71,31 @@ const Main = styled.div`
 `;
 
 const Home = () => {
-  
+  const [products, setProducts] = useState("");
+
+  useEffect(() =>{
+    const fetchData = async () =>{
+      const data = await axios.get('/products/get');
+      // console.log(data);
+      setProducts(data);
+    }
+    fetchData();
+    // eslint-disable-next-lin
+  },[]);
 
   return (
     <Container>
-      <Navbar/>
       <Banner>
         <img src="./banner.jpg" alt="banner" />
         <img src="./mobile_banner.jpg" alt="mobile banner" />
       </Banner>
 
       <Main>
-        <Card id={1} image={"./logo192.png"} price={2500} rating={4} title={"EcoDot"}/>
+        {
+          products && products?.data.map(
+            (product) =>(<Card key={product.id} title={product.title} image={product.imageURL} price={product.price} rating={product.rating}/>)
+          )
+        }
       </Main>
     </Container>
   )

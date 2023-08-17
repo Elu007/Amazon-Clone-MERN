@@ -1,7 +1,6 @@
 import React from 'react'
 import { useStateValue } from '../StateProvider'
 import styled from 'styled-components'
-import Navbar from './Navbar'
 import { getBasketTotal } from '../reducer'
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from 'react-number-format';
@@ -134,7 +133,6 @@ const Checkout = () => {
 
   return (
     <Container>
-      <Navbar />
       <Main>
         <ShoppingCart>
           <h2>Shopping Cart</h2>
