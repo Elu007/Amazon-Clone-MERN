@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const stripe = require('stripe')("sk_test_51NeC2BSIt5ZXu8rJP8ybfZGzYpNDnN2TBMMUOodJhLP56IB91hpX9XLF9dXy5e6b9ehTF8hBLVVLDTvzPLneoiZs00ndg5jeQu");
 
 const app = express();
 const port = 5000;
@@ -29,7 +30,6 @@ app.get('/', (req, res) => res.status(200).send("Hello World"));
 app.post("/products/add", async (req, res) => {
     try {
         const productDetail = req.body;
-        console.log("Product Detail >>>", productDetail);
         const data = await Product.create(productDetail);
         res.status(201).send(data);
     } catch (error) {
@@ -47,6 +47,20 @@ app.get('/products/get', async(req,res) =>{
     } catch (error) {
         res.status(500).send(error.message);
     }
+})
+
+// API for payments
+
+app.post('/payment/create', async(req,res) =>{
+    const total = req.body.amount;
+
+    const payment = await stripe.paymentIntents.create({
+        amount: total*100,
+        currency: 'inr',
+    });
+    res.status(201).send({
+        clientSecret: payment.client_secret,
+    });
 })
 
 

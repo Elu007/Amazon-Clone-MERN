@@ -120,7 +120,6 @@ const Description = styled.div`
 
 const Checkout = () => {
   const [{ basket }, dispatch] = useStateValue();
-  console.log('checkout >>>', basket);
   const navigate = useNavigate();
 
   const removeFromBasket = (e,id) =>{

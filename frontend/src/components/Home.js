@@ -24,6 +24,15 @@ const Banner = styled.div`
       rgba(0, 0, 0, 0.55),
       rgba(0, 0, 0, 0)
     );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 2),
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0)
+    );
 
     &:nth-child(2) {
       display: none;
@@ -37,6 +46,7 @@ const Banner = styled.div`
       &:nth-child(2) {
         display: block;
         -webkit-mask-image: none;
+        mask-image: none;
       }
     }
   }
@@ -48,7 +58,7 @@ const Main = styled.div`
   place-items: center;
   width: 100%;
 
-  grid-auto-rows: 420px;
+  grid-auto-rows: 520px;
   grid-template-columns: repeat(4, 280px);
   grid-gap: 20px;
 
@@ -76,7 +86,6 @@ const Home = () => {
   useEffect(() =>{
     const fetchData = async () =>{
       const data = await axios.get('/products/get');
-      // console.log(data);
       setProducts(data);
     }
     fetchData();

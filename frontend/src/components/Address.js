@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Navbar from './Navbar';
 import { useStateValue } from '../StateProvider';
 import { useNavigate } from 'react-router-dom';
 
@@ -102,7 +101,6 @@ const Address = () => {
 
   return (
     <Container>
-      <Navbar />
       <Main>
         <FormContainer>
           <InputContainer>

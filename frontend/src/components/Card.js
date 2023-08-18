@@ -6,7 +6,6 @@ import { useStateValue } from '../StateProvider';
 const Container = styled.div`
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -24,7 +23,7 @@ const Image = styled.div`
   margin-top: 20px;
   flex: 0.3;
   img {
-    width: 180px;
+    width: 100%;
     height: 200px;
   }
 `;
@@ -58,7 +57,6 @@ const Description = styled.div`
 
 const Card = ({ id, image, title, price, rating}) => {
   const [{basket}, dispatch] = useStateValue();
-  console.log('basket>>>', basket);
 
   const addToBasket = (e) =>{
     e.preventDefault();

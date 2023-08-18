@@ -1,15 +1,45 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useStateValue } from '../StateProvider';
 import { getBasketTotal } from '../reducer';
 import { NumericFormat } from 'react-number-format';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 const Payment = () => {
 
-  const [{ address, basket }] = useStateValue();
+  const [{ address, basket }, dispatch] = useStateValue();
+  const [clientSecret, setClientSecret] = useState('');
   const elements = useElements();
   const stripe = useStripe();
+  const navigate = useNavigate();
+
+  useEffect(() =>{
+    const fetchClinetSecret = async () =>{
+      const data = await axios.post('/payment/create', {
+        amount: getBasketTotal(basket),
+      });
+      setClientSecret(data.data.clientSecret);
+    }
+    fetchClinetSecret();
+  });
+
+  const confirmPayment = async (e) =>{
+    e.preventDefault();
+    await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      }
+    })
+    .then((result) =>{
+      alert('Payment Successful');
+      dispatch({
+        type:'EMPTY_BASKET'
+      })
+      navigate('/');
+    }).catch((error) => console.warn(error));
+  };
 
   return (
     <Container>
@@ -62,7 +92,7 @@ const Payment = () => {
           <p>Subtotal ( {basket.length} items): &nbsp;
             <NumericFormat value={getBasketTotal(basket).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'₹'} />
           </p>
-          <button>Place Order</button>
+          <button onClick={confirmPayment}>Place Order</button>
         </Subtotal>
       </Main>
     </Container>
