@@ -7,14 +7,20 @@ import SignUp from './components/SignUp';
 import Checkout from './components/Checkout';
 import Address from './components/Address'
 import Payment from './components/Payment';
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import AddProduct from './components/AddProduct';
 import Navbar from './components/Navbar';
+import Orders from './components/Orders';
 
 
 const Container = styled.div`
   width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const promise = loadStripe(
@@ -25,17 +31,18 @@ function App() {
 
   return (
     <Container>
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/checkout' element={<Checkout/>} />
-        <Route path='/signup' element={<SignUp/>} />
-        <Route path='/address' element={<Address/>} />
-        <Route path='/addproduct' element={<AddProduct/>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/address' element={<Address />} />
+        <Route path='/addproduct' element={<AddProduct />} />
         <Route path='/payment' element={<Elements stripe={promise}>
-          <Payment/>
+          <Payment />
         </Elements>} />
+        <Route path='/orders' element={<Orders />} />
       </Routes>
     </Container>
   );

@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const Payment = () => {
 
-  const [{ address, basket }, dispatch] = useStateValue();
+  const [{ address, basket, user }, dispatch] = useStateValue();
   const [clientSecret, setClientSecret] = useState('');
   const elements = useElements();
   const stripe = useStripe();
@@ -33,7 +33,14 @@ const Payment = () => {
       }
     })
     .then((result) =>{
-      alert('Payment Successful');
+
+      axios.post('/orders/add',{
+        basket:basket,
+        price:getBasketTotal(basket),
+        email:user?.email,
+        address:address
+      })
+
       dispatch({
         type:'EMPTY_BASKET'
       })

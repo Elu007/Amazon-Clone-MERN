@@ -145,8 +145,18 @@ const BasketButton = styled.div`
 
 const Navbar = () => {
 
-  const [{basket}] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
+  const signOut = () => {
+    dispatch({
+      type: "SET_USER",
+      user: null,
+    });
+
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <Container>
       <Inner>
@@ -160,11 +170,11 @@ const Navbar = () => {
           </SearchIcon>
         </SearchBar>
         <RightContainer>
-          <NavButton>
+          <NavButton  onClick={user ? () => signOut() : () => navigate("/login")}>
             <p>Hello,</p>
-            <p>Guest</p>
+            <p>{user ? user?.fullName : "Guest"}</p>
           </NavButton>
-          <NavButton>
+          <NavButton onClick={navigate('/orders')}>
             <p>Return</p>
             <p>& Orders</p>
           </NavButton>
