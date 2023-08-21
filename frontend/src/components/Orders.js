@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
+import axios from '../axios'
 import { useStateValue } from '../StateProvider'
 
 const Orders = () => {
   const [{ user }] = useStateValue();
   const [orders, setOrders] = useState([]);
+
   useEffect(() => {
-    axios
-      .post("/orders/get", { email: user.email })
-      .then((res) => setOrders(res.data));
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.post("/orders/get", { email: user && user.email });
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
+    // eslint-disable-next-line
   }, []);
-  console.log(orders);
+
+
 
   return (
     <Container>

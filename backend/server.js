@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const stripe = require('stripe')("sk_test_51NeC2BSIt5ZXu8rJP8ybfZGzYpNDnN2TBMMUOodJhLP56IB91hpX9XLF9dXy5e6b9ehTF8hBLVVLDTvzPLneoiZs00ndg5jeQu");
 
 const app = express();
@@ -140,7 +140,7 @@ app.post('/orders/add', (req, res) => {
         } catch (error) {
             console.log(error);
         }
-    })();
+    });
 });
 
 // Order details API, POST request because we need to find specific order details
